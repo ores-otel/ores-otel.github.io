@@ -1,0 +1,112 @@
+---
+const pageTitle = 'ORES OTEL — One telemetry contract across every runtime';
+const description = 'Structured logs, trace context, redaction, and injectable transports for services, browsers, workers, and native clients.';
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href="https://ores-otel.github.io/" />
+    <meta name="theme-color" content="#111315" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://ores-otel.github.io/" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header>
+      <a class="brand" href="/" aria-label="ORES OTEL home"><span class="sigil" aria-hidden="true">O:</span><span>ORES <i>OTEL</i></span></a>
+      <nav aria-label="Primary navigation">
+        <a href="#contract">Contract</a><a href="#runtimes">SDKs</a><a href="#repositories">Repositories</a>
+        <a class="github" href="https://github.com/ores-otel">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Polyglot observability / strict wire format</p>
+          <h1>One telemetry contract<br /><em>across every runtime.</em></h1>
+          <p class="lede">Structured logs, trace context, redaction, and injectable transports for services, browsers, workers, and native clients—without global runtime mutation.</p>
+          <div class="actions">
+            <a class="button copper" href="https://github.com/ores-otel/ores.otel.log">Open ores.otel.log</a>
+            <a class="button ghost" href="#contract">Inspect the record</a>
+          </div>
+        </div>
+        <div class="trace-console" aria-label="Illustrative telemetry trace">
+          <div class="console-head"><span>LIVE TRACE</span><b>next-loggers/v1</b><i></i></div>
+          <div class="trace summary"><span class="time">12:04:18.042</span><span class="level info">INFO</span><strong>checkout.begin</strong><small>trace 7f2a</small></div>
+          <div class="rail" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="trace child"><span class="time">+004ms</span><span class="level">SPAN</span><strong>auth.verify</strong><small>12ms</small></div>
+          <div class="trace child"><span class="time">+018ms</span><span class="level">SPAN</span><strong>ledger.append</strong><small>31ms</small></div>
+          <div class="trace warn"><span class="time">+051ms</span><span class="level warning">WARN</span><strong>retry.scheduled</strong><small>bounded</small></div>
+          <div class="trace summary end"><span class="time">12:04:18.104</span><span class="level info">INFO</span><strong>checkout.complete</strong><small>62ms</small></div>
+          <div class="context-row"><span>request_id</span><b>req_84c1</b><span>tenant_id</span><b>org_103</b><span>secret</span><b>[REDACTED]</b></div>
+        </div>
+      </section>
+
+      <section class="principles">
+        <article><span>01 / SHAPE</span><h2>Structured at origin.</h2><p>A strict event record carries level, timestamp, message, context, trace correlation, and bounded fields through every adapter.</p></article>
+        <article><span>02 / CONTEXT</span><h2>Correlated across hops.</h2><p>Request and trace context follows async execution where supported, without quietly rewriting global runtime state.</p></article>
+        <article><span>03 / SAFETY</span><h2>Redacted before transit.</h2><p>Sensitive keys are hidden by default and serialization is bounded before an event reaches any external transport.</p></article>
+        <article><span>04 / DELIVERY</span><h2>Your transport, injected.</h2><p>Bring OpenTelemetry, Supabase, HTTP, Loki, or a test transport. The contract stays stable while delivery changes.</p></article>
+      </section>
+
+      <section class="contract section" id="contract">
+        <div class="section-intro">
+          <p class="kicker">The wire record</p>
+          <h2>Readable by people.<br />Predictable for machines.</h2>
+          <p>next-loggers/v1 is the narrow waist between applications and telemetry infrastructure. Producers emit one bounded record; adapters decide where it goes.</p>
+        </div>
+        <div class="record">
+          <div class="record-title"><span>EVENT RECORD</span><span>VALID</span></div>
+          <pre><code>&#123;
+  <span>"schema"</span>: "next-loggers/v1",
+  <span>"level"</span>: "info",
+  <span>"message"</span>: "invoice.created",
+  <span>"trace_id"</span>: "7f2a…",
+  <span>"context"</span>: &#123;
+    "request_id": "req_84c1",
+    "customer_email": <b>"[REDACTED]"</b>
+  &#125;
+&#125;</code></pre>
+          <div class="record-foot"><i></i> schema-valid <i></i> bounded <i></i> redacted</div>
+        </div>
+      </section>
+
+      <section class="runtime-section section" id="runtimes">
+        <p class="kicker">Surface area</p>
+        <div class="runtime-heading"><h2>From edge isolate to native process.</h2><p>SDKs share the same event vocabulary while respecting each platform’s execution and context model.</p></div>
+        <div class="runtime-list" aria-label="Supported SDK runtimes">
+          <span>TypeScript</span><span>Rust</span><span>Go</span><span>Python</span><span>Java</span><span>Dart / Flutter</span><span>Gleam</span><span>Erlang</span><span>Elixir</span><span>Ruby</span><span>WASM</span><span>Browser · Edge</span><span>Node · Bun · Deno</span><span>Cloudflare Workers</span>
+        </div>
+      </section>
+
+      <section class="schema-band">
+        <div><span class="big-mark" aria-hidden="true">⌁</span><p class="kicker">Shared contracts</p><h2>Identity, authorization, requests, errors, and security events use canonical JSON Schemas.</h2></div>
+        <p><b>ores-interfaces</b> defines the portable contracts. <b>ores-lib-core</b> turns them into reusable redaction, correlation, and security primitives.</p>
+        <a href="https://github.com/ores-otel/ores-interfaces">Browse interfaces →</a>
+      </section>
+
+      <section class="repositories section" id="repositories">
+        <div class="section-intro compact"><p class="kicker">Repository map</p><h2>Small surfaces. Clear ownership.</h2></div>
+        <div class="repo-grid">
+          <a href="https://github.com/ores-otel/ores.otel.log"><span>01</span><div><h3>ores.otel.log</h3><p>Polyglot logging and telemetry SDKs</p></div><b>↗</b></a>
+          <a href="https://github.com/ores-otel/ores-interfaces"><span>02</span><div><h3>ores-interfaces</h3><p>Canonical cross-runtime contracts</p></div><b>↗</b></a>
+          <a href="https://github.com/ores-otel/ores-lib-core"><span>03</span><div><h3>ores-lib-core</h3><p>Security, redaction, and adapter primitives</p></div><b>↗</b></a>
+        </div>
+      </section>
+    </main>
+    <footer><div class="brand"><span class="sigil" aria-hidden="true">O:</span><span>ORES <i>OTEL</i></span></div><p>Observable systems begin with a trustworthy event.</p><span>MIT licensed · <a href="https://github.com/ores-otel">GitHub</a></span></footer>
+  </body>
+</html>
+
+<style is:global>
+  :root{--bg:#111315;--panel:#191c1f;--panel2:#202428;--ink:#eef1ed;--muted:#a3aaa4;--line:#343a3c;--copper:#dc8d5a;--mint:#7ad7bd;--yellow:#e4c96d;--white:#f5f4ef;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-synthesis:none}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px);background-size:100% 24px}a{color:inherit}.skip-link{position:fixed;top:-4rem;left:1rem;background:var(--copper);color:#111;padding:.8rem;z-index:100}.skip-link:focus{top:1rem}header,main,footer{width:min(1200px,calc(100% - 42px));margin-inline:auto}header{height:88px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between}.brand{display:flex;gap:.65rem;align-items:center;text-decoration:none;font-weight:900;letter-spacing:.04em}.brand i{font-style:normal;color:var(--copper)}.sigil{width:30px;height:30px;border:1px solid var(--copper);display:grid;place-items:center;font:800 .72rem ui-monospace,monospace;color:var(--copper)}nav{display:flex;align-items:center;gap:1.6rem;font-size:.78rem;font-weight:800}nav a{text-decoration:none}nav>a:not(.github):hover{color:var(--copper)}.github{border:1px solid var(--line);padding:.7rem .9rem}.hero{min-height:670px;display:grid;grid-template-columns:1.05fr .95fr;gap:6vw;align-items:center;padding:80px 0}.eyebrow,.kicker{font:800 .68rem ui-monospace,monospace;letter-spacing:.16em;text-transform:uppercase;color:var(--copper)}h1,h2,h3,p{margin-top:0}h1{font-family:"Arial Narrow",Inter,sans-serif;font-size:clamp(3.8rem,7.1vw,7rem);line-height:.88;letter-spacing:-.075em;margin:1.3rem 0 2rem;text-transform:uppercase}h1 em{font-style:normal;color:var(--copper)}.lede{font-size:1.12rem;line-height:1.7;color:var(--muted);max-width:650px}.actions{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:2.1rem}.button{padding:.85rem 1.05rem;text-decoration:none;font-size:.8rem;font-weight:900;border:1px solid var(--line)}.button.copper{background:var(--copper);border-color:var(--copper);color:#17120f}.button.ghost:hover{border-color:var(--copper)}.trace-console{background:#0b0d0e;border:1px solid #41484a;padding:18px;box-shadow:12px 12px 0 #282d30;font:600 .67rem ui-monospace,SFMono-Regular,monospace;position:relative}.console-head{display:flex;align-items:center;padding:3px 0 16px;color:var(--muted);letter-spacing:.12em;border-bottom:1px solid var(--line)}.console-head b{margin-left:auto;color:var(--copper);font-weight:600}.console-head i{margin-left:10px;width:7px;height:7px;border-radius:50%;background:var(--mint);box-shadow:0 0 8px var(--mint)}.trace{display:grid;grid-template-columns:100px 52px 1fr auto;gap:10px;padding:15px 8px;border-bottom:1px solid #202426;align-items:center}.trace.child{margin-left:25px;border-left:1px solid #485054}.trace .time,.trace small{color:#727b7d}.level{color:#a6b0b2}.level.info{color:var(--mint)}.level.warning{color:var(--yellow)}.trace strong{font-weight:700}.rail{position:absolute;left:31px;top:126px;height:128px;border-left:1px solid var(--copper)}.rail i{position:absolute;left:-3px;width:5px;height:5px;border-radius:50%;background:var(--copper)}.rail i:nth-child(1){top:0}.rail i:nth-child(2){top:50%}.rail i:nth-child(3){bottom:0}.context-row{display:grid;grid-template-columns:auto 1fr auto 1fr auto 1fr;gap:7px 10px;padding:18px 8px 4px;color:#70797a}.context-row b{color:#bdc6c1;font-weight:600}.principles{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr)}.principles article{padding:32px 27px;min-height:260px;border-right:1px solid var(--line)}.principles article:last-child{border:0}.principles span{font:700 .62rem ui-monospace,monospace;color:var(--copper)}.principles h2{font-size:1.25rem;margin:4rem 0 .8rem}.principles p{color:var(--muted);font-size:.85rem;line-height:1.65}.section{padding:115px 0}.contract{display:grid;grid-template-columns:.9fr 1.1fr;gap:8vw;align-items:center;border-bottom:1px solid var(--line)}.section-intro h2,.runtime-heading h2,.schema-band h2{font-size:clamp(2.7rem,5.3vw,5.4rem);line-height:.94;letter-spacing:-.06em;margin:1rem 0 1.6rem;text-transform:uppercase}.section-intro>p:last-child{color:var(--muted);line-height:1.75;max-width:600px}.record{background:var(--white);color:#222;border-top:5px solid var(--copper)}.record-title{display:flex;justify-content:space-between;padding:15px 22px;border-bottom:1px solid #c9c8c0;font:800 .62rem ui-monospace,monospace;letter-spacing:.14em}.record-title span:last-child{color:#397461}.record pre{margin:0;padding:30px 22px;font-size:.8rem;line-height:1.85;overflow:auto}.record code>span{color:#86512e}.record code b{color:#9c2d36}.record-foot{padding:14px 22px;border-top:1px solid #c9c8c0;font:700 .61rem ui-monospace,monospace;display:flex;gap:8px;align-items:center;color:#687069}.record-foot i{width:6px;height:6px;background:#397461;border-radius:50%}.runtime-section{border-bottom:1px solid var(--line)}.runtime-heading{display:grid;grid-template-columns:1.2fr .7fr;gap:6vw;align-items:end}.runtime-heading p{color:var(--muted);line-height:1.7}.runtime-list{display:flex;flex-wrap:wrap;border-top:1px solid var(--line);border-left:1px solid var(--line);margin-top:50px}.runtime-list span{padding:17px 20px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font:700 .72rem ui-monospace,monospace;color:#c9cfca;flex:1 0 150px}.runtime-list span:hover{background:var(--copper);color:#16120f}.schema-band{width:100%;background:var(--copper);color:#18130f;padding:80px max(20px,calc((100vw - 1200px)/2));display:grid;grid-template-columns:1.2fr .6fr auto;gap:5vw;align-items:end}.schema-band .kicker{color:#4a2a18}.schema-band h2{font-size:clamp(2.3rem,4vw,4.1rem);margin-bottom:0}.schema-band>p{line-height:1.75}.schema-band>a{font-weight:900;text-decoration:none;border-bottom:2px solid;padding-bottom:.3rem;white-space:nowrap}.big-mark{font-size:2rem}.section-intro.compact{display:grid;grid-template-columns:.4fr 1.6fr;gap:2rem;align-items:start}.repo-grid{border-top:1px solid var(--line)}.repo-grid>a{display:grid;grid-template-columns:80px 1fr auto;align-items:center;padding:25px 6px;text-decoration:none;border-bottom:1px solid var(--line)}.repo-grid>a>span{font:700 .7rem ui-monospace,monospace;color:var(--copper)}.repo-grid h3{margin:0 0 .3rem;font-size:1.05rem}.repo-grid p{margin:0;color:var(--muted);font-size:.82rem}.repo-grid>a>b{font-size:1.4rem;color:var(--copper)}.repo-grid>a:hover{background:var(--panel)}footer{padding:50px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:1fr 1fr auto;gap:2rem;align-items:center;color:var(--muted);font-size:.78rem}footer p{margin:0}footer a{color:var(--ink)}
+  :focus-visible{outline:2px solid var(--copper);outline-offset:4px}@media(max-width:900px){.hero,.contract{grid-template-columns:1fr}.principles{grid-template-columns:repeat(2,1fr)}.principles article:nth-child(2){border-right:0}.runtime-heading,.schema-band{grid-template-columns:1fr}.schema-band{align-items:start}.schema-band>a{width:max-content}.section-intro.compact{grid-template-columns:1fr}footer{grid-template-columns:1fr}}@media(max-width:620px){header{height:auto;padding:18px 0;align-items:flex-start}nav a:not(.github){display:none}.hero{padding:60px 0}h1{font-size:3.55rem}.trace-console{padding:10px}.trace{grid-template-columns:62px 42px 1fr}.trace small{display:none}.context-row{grid-template-columns:auto 1fr}.rail{display:none}.principles{grid-template-columns:1fr}.principles article{border-right:0;border-bottom:1px solid var(--line);min-height:auto}.principles h2{margin-top:2rem}.section{padding:80px 0}.schema-band{padding-block:65px}.repo-grid>a{grid-template-columns:35px 1fr auto}header,main,footer{width:min(100% - 26px,1200px)}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
