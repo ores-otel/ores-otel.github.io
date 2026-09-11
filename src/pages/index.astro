@@ -1,4 +1,6 @@
 ---
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+
 const pageTitle = 'ORES OTEL — One telemetry contract across every runtime';
 const description = 'Structured logs, trace context, redaction, and injectable transports for services, browsers, workers, and native clients.';
 ---
@@ -19,6 +21,13 @@ const description = 'Structured logs, trace context, redaction, and injectable t
   </head>
   <body>
     <a class="skip-link" href="#main">Skip to content</a>
+    <AnnouncementBar
+      storageKey="site-announcement:ores-otel:v1"
+      message="Happy 2026, y’all!"
+      href="https://github.com/ores-otel"
+      linkLabel="See what we’re building"
+      tone="copper"
+    />
     <header>
       <a class="brand" href="/" aria-label="ORES OTEL home"><span class="sigil" aria-hidden="true">O:</span><span>ORES <i>OTEL</i></span></a>
       <nav aria-label="Primary navigation">
