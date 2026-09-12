@@ -3,6 +3,11 @@ dist/
 .astro/
 .DS_Store
 
+# >>> ores fleet hygiene — managed block, edits below are overwritten >>>
+tmp/temp/
+tmp/worktrees/
+# <<< ores fleet hygiene <<<
+
 # Local temporary directories and repository-owned worktrees
 tmp/
 temp/
