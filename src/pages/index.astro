@@ -74,7 +74,7 @@ const description = 'Structured logs, trace context, redaction, and injectable t
         </div>
         <div class="record">
           <div class="record-title"><span>EVENT RECORD</span><span>VALID</span></div>
-          <pre><code>&#123;
+          <pre><code id="otel-record-example">&#123;
   <span>"schema"</span>: "next-loggers/v1",
   <span>"level"</span>: "info",
   <span>"message"</span>: "invoice.created",
@@ -84,7 +84,7 @@ const description = 'Structured logs, trace context, redaction, and injectable t
     "customer_email": <b>"[REDACTED]"</b>
   &#125;
 &#125;</code></pre>
-          <div class="record-foot"><i></i> schema-valid <i></i> bounded <i></i> redacted</div>
+          <div class="record-foot"><i></i> schema-valid <i></i> bounded <i></i> redacted <button class="button ghost" id="copy-otel-record" type="button">Copy JSON</button><span id="copy-otel-status" role="status" aria-live="polite"></span></div>
         </div>
       </section>
 
@@ -112,6 +112,7 @@ const description = 'Structured logs, trace context, redaction, and injectable t
       </section>
     </main>
     <footer><div class="brand"><span class="sigil" aria-hidden="true">O:</span><span>ORES <i>OTEL</i></span></div><p>Observable systems begin with a trustworthy event.</p><span>MIT licensed · <a href="https://github.com/ores-otel">GitHub</a></span></footer>
+    <script is:inline type="module" src="/copy-otel-record.js"></script>
   </body>
 </html>
 
